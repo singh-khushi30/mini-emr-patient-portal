@@ -205,29 +205,5 @@ npm run dev
 
 4. Open [http://localhost:3000](http://localhost:3000)
 
-## Deployment
 
-### Vercel (recommended)
-
-1. Push repository to GitHub.
-2. Import project into Vercel.
-3. Set environment variables in Vercel project settings:
-   - `NEXT_PUBLIC_SUPABASE_URL`
-   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-4. Deploy.
-
-### Supabase
-
-- Ensure production tables and columns match the schema expectations listed above.
-- Configure Row Level Security (RLS) policies before production launch.
-
-## Notes for Interview Submission
-
-- Keep sample data in Supabase to demonstrate end-to-end flows.
-- Demo script:
-  1. Login as patient
-  2. Show dashboard + schedules
-  3. Switch to admin
-  4. Create patient
-  5. Add/edit/delete appointments and prescriptions
 
