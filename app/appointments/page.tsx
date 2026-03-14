@@ -2,7 +2,7 @@
 export const dynamic = "force-dynamic";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 type Appointment = {
@@ -13,7 +13,7 @@ type Appointment = {
   repeat_schedule?: string;
 };
 
-export default function AppointmentsPage() {
+function PageContent() {
   const searchParams = useSearchParams();
   const patientId = searchParams.get("patientId") || "";
 
@@ -88,5 +88,13 @@ export default function AppointmentsPage() {
         </table>
       </div>
     </div>
+  );
+}
+
+export default function AppointmentsPage() {
+  return (
+    <Suspense fallback={<p>Loading...</p>}>
+      <PageContent />
+    </Suspense>
   );
 }

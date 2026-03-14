@@ -2,7 +2,7 @@
 export const dynamic = "force-dynamic";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 type Prescription = {
@@ -14,7 +14,7 @@ type Prescription = {
   refill_schedule?: string;
 };
 
-export default function PrescriptionsPage() {
+function PageContent() {
   const searchParams = useSearchParams();
   const patientId = searchParams.get("patientId") || "";
 
@@ -91,5 +91,13 @@ export default function PrescriptionsPage() {
         </table>
       </div>
     </div>
+  );
+}
+
+export default function PrescriptionsPage() {
+  return (
+    <Suspense fallback={<p>Loading...</p>}>
+      <PageContent />
+    </Suspense>
   );
 }
