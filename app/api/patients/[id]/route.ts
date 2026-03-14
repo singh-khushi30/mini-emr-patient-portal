@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server";
 import { supabase } from "@/lib/supabaseClient";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 type RouteContext = {
   params: Promise<{ id: string }>;
 };
@@ -58,7 +61,14 @@ export async function GET(_request: Request, context: RouteContext) {
         appointments: appointments ?? [],
         prescriptions: prescriptions ?? [],
       },
-      { status: 200 },
+      {
+        status: 200,
+        headers: {
+          "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+          Pragma: "no-cache",
+          Expires: "0",
+        },
+      },
     );
   } catch (error: unknown) {
     return NextResponse.json(

@@ -50,7 +50,9 @@ export default function AdminPatientDetailPage() {
     setLoading(true);
     setError("");
     try {
-      const response = await fetch(`/api/patients/${patientId}`);
+      const response = await fetch(`/api/patients/${patientId}`, {
+        cache: "no-store",
+      });
       const payload = await response.json();
       if (!response.ok) {
         throw new Error(payload.error || "Failed to load patient details");
